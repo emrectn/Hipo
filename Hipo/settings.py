@@ -126,6 +126,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # Flicker api and api key
 FLICKER_API_KEY = '1ddb7df62cbdc4e07f6ec75ca78e2960'
 FLICKER_API = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={api_key}&tags={tag}&format=json&nojsoncallback=1'
