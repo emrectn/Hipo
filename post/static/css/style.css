@@ -1,0 +1,34 @@
+.value-img {
+    display: block;
+    margin: 2.5rem auto 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 200px;
+    border-radius: 4px;
+    object-fit: cover;
+    mso-border-shadow: yes;
+}
+
+.value-prop {
+    margin-top: 1rem;
+}
+
+.value-props {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.marg-left {
+    margin: 5px;
+}
+
+.special-p {
+    padding: 5px;
+}
+
+p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

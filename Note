@@ -1,0 +1,37 @@
+# Yeni bir app oluşturulduğunda çağrılır.
+python manage.py makemigrations
+
+# Değişiklikleri veritabanına yazma
+python manage.py migrate
+
+python manage.py createsuperuser
+# admin paneli için super user oluşturulur.
+
+python manage.py runserver
+# Serverin çalıştırılması
+
+# Post Kaydetme
+nesne = Post()
+nesne.title = "Deneme"
+nesne.text = "Deneme"
+nesne.save()
+
+# Aynı nesneyi güncelleyebilirsin
+nesne.title = "Degisti"
+nesne.save()
+
+# Tüm Postları çekme
+Post.objects.all()
+
+# id ile Post Çekme
+a = Post.objects.get(id=1)
+
+# çekilen nesneyi silme
+a.delete()
+
+# Post create
+Post.objects.create(title="Deneme", content="Deneme")
+
+# Post filter
+Post.objects.filter(title__contains="deneme")
+

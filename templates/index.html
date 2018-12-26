@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+	<link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Flicker Client</title>
+
+</head>
+<body>
+    <div class="container" style="margin-top: 5%; ">
+        <h1>The Ultimate Flickr Client</h1>
+
+        {# If the internet does not exist, the error message is published. #}
+        {% if error %}
+        <div class="row">
+            {{ error }}
+        </div>
+        {% endif %}
+
+
+        <div class="row">
+            <div class="nine columns">
+                <form action="/post/search" method="get">
+                    <div class="row">
+                        <div class="eight columns">
+                            <input type="text" class="u-full-width" name="title" placeholder="I am looking for...">
+                        </div>
+                        <div class="four columns">
+                            <input type="submit" class="button-primary" value="Search">
+                        </div>
+                    </div>
+                </form>
+
+                {# If a search is made, the results will display.#}
+                {% if photos %}
+                <h5>Results</h5>
+                <div>
+                    {% for photo in photos %}
+                        <div class="six columns marg-left">
+                            <img class="value-img" src="https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}.jpg">
+                            <p class="special-p"><b>{{ photo.title }}</b></p>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="three columns">
+                <h5>Previous Searches</h5>
+                <ol>
+                    {% for entry in previous_search %}
+                        <li><a href="/post/search?title={{ entry.title }}"><b>{{ entry }} ({{ entry.hits }})</b></a></li>
+                    {% empty %}
+                        <li>Sorry, no search entries.</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+
+        {# Pagination #}
+        {% if photos %}
+        <div class="row">
+            <div class="nine columns" style="text-align: center">
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if photos.has_previous %}
+                            <a class="button" href="/post/search?title={{ title }}&page={{ photos.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="current" style="padding: 10px">
+                            <b>Page {{ photos.number }} of {{ photos.paginator.num_pages }}</b>
+                        </span>
+
+                        {% if photos.has_next %}
+                            <a class="button" href="/post/search?title={{ title }}&page={{ photos.next_page_number }}">next</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
